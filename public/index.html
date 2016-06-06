@@ -34,13 +34,16 @@
             var marker = new google.maps.Marker({
                 position: myLatLng,
                 map: map,
+                draggable: true
             });
 
             map.addListener('click', function(e) {
                 placeMarkerAndPanTo(e.latLng, map, marker);
             });
 
-            getMarkerPosition(marker)
+            marker.addListener('drag', function(e) {
+                placeMarkerAndPanTo(e.latLng, map, marker);
+            });
         }
 
         function placeMarkerAndPanTo(latLng, map, marker) {
